@@ -2,6 +2,13 @@
 	text-align: center;
 	margin: 0 auto;
 }
-.form-title{
-    margin-top: 20px;
+.form-title {
+	margin-top: 20px;
+}
+
+.selected-form {
+	background-color: white;
+	color: blue;
+	font-size: 20px;
+	padding: 5px 10px;
 }
