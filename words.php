@@ -2,7 +2,6 @@
 session_start();
 require_once "function.php";
 $user_id = $_SESSION['id'] ?? 0;
-echo $user_id;
 if (!$user_id) {
     $statusCode = 8;
     header("location: index.php?status=$statusCode");
@@ -15,7 +14,7 @@ if (!$user_id) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lkhdfldh</title>
+    <title>Vocabulary Builder - Home</title>
     <link rel="stylesheet" href="assets/vendors/normalize.css">
     <link rel="stylesheet" href="assets/vendors/milligram.min.css">
     <link rel="stylesheet" href="assets/style.css">
@@ -46,23 +45,40 @@ if (!$user_id) {
                             <option value="B">B#</option>
                             <option value="C">C#</option>
                             <option value="D">D#</option>
-                            <option value="N">N#</option>
+                            <option value="E">E#</option>
+                            <option value="F">F#</option>
+                            <option value="G">G#</option>
+                            <option value="H">H#</option>
+                            <option value="I">I#</option>
+                            <option value="J">J#</option>
+                            <option value="K">K#</option>
+                            <option value="L">L#</option>
                             <option value="M">M#</option>
+                            <option value="N">N#</option>
+                            <option value="O">O#</option>
+                            <option value="P">P#</option>
+                            <option value="Q">Q#</option>
+                            <option value="R">R#</option>
+                            <option value="S">S#</option>
+                            <option value="T">T#</option>
+                            <option value="U">U#</option>
+                            <option value="V">V#</option>
+                            <option value="W">W#</option>
+                            <option value="X">X#</option>
+                            <option value="Y">Y#</option>
+                            <option value="Z">Z#</option>
                         </select>
 
                     </div>
                 </div>
-
                 <div class="column column-50">
                     <form action="" method="POST">
                         <button class="float-right" name="submit" value="submit">Search</button>
-                        <input type="text" name="search" class="float-right" style="width: 50%; margin-right:20px;" placeholder="Search">
+                        <input type="text" name="search" class="float-right" style="width: 50%; margin-right:20px;" placeholder="Search Word">
                     </form>
                 </div>
             </div>
-
             <hr>
-
             <table class="words helement">
                 <thead>
                     <tr>
@@ -73,27 +89,15 @@ if (!$user_id) {
                 <tbody>
                     <?php
 
-                    // if(isset($_POST['submit'])){
-                    //     $serachedText = $_POST['search'];
-                    //     $words = getWords($_user_id, $serachedText);
-                    // }else{
-                    // }
-                    function getWords($user_id) {
-                        global $connection;
-                        $query = "SELECT * FROM words WHERE user_id = '{$user_id}'";
-
-                        $result = mysqli_query($connection, $query);
-                        $result_data = [];
-                        while ($_data = mysqli_fetch_assoc($result)) {
-                            array_push($result_data, $_data);
-                        }
-                        return $result_data;
-                    }
-                    $words = getWords($user_id);
+                    if(isset($_POST['submit'])){
+                        $serachedText = $_POST['search'];
+                        $words = getWords($user_id, $serachedText);
+                    }else{
+                        $words = getWords($user_id);
+                    }                    
                     $length = count($words);
                     if ($length > 0) {
                         for ($i = 0; $i < $length; $i++) {
-
                     ?>
                             <tr>
                                 <td><?php
@@ -103,7 +107,6 @@ if (!$user_id) {
                                     echo $words[$i]['definition'];
                                     ?></td>
                             </tr>
-
                     <?php
                         }
                     }

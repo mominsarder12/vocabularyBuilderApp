@@ -5,7 +5,6 @@ if ($user_id) {
     header("location: words.php");
     die();
 }
-
 include_once "config.php";
 include_once "function.php";
 $statusCode = $_GET['status'] ?? '';
@@ -17,7 +16,7 @@ $statusCode = $_GET['status'] ?? '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tasks projects</title>
+    <title>Vocabulary Builder - Register or Login</title>
     <link rel="stylesheet" href="assets/vendors/normalize.css">
     <link rel="stylesheet" href="assets/vendors/milligram.min.css">
     <link rel="stylesheet" href="assets/style.css">
@@ -61,8 +60,6 @@ $statusCode = $_GET['status'] ?? '';
                 </div>
             </div>
         </div>
-
-
     </div> <!-- end the container of this site -->
 
     <script src="assets/main.js"></script>

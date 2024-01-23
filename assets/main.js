@@ -20,17 +20,40 @@ if (loginBtn && registerBtn && formAction && fromTitle) {
 }
 
 // Click event for ".menu-item"
-document.querySelectorAll(".menu-item").forEach(function(menuItem) {
-    menuItem.addEventListener("click", function() {
-        document.querySelectorAll(".helement").forEach(function(helement) {
-            helement.style.display = 'none';
-        });
+document.querySelectorAll(".menu-item").forEach(function (menuItem) {
+	menuItem.addEventListener("click", function () {
+		document.querySelectorAll(".helement").forEach(function (helement) {
+			helement.style.display = "none";
+		});
 
-        var targetId = "#" + menuItem.getAttribute("data-target");
-        var targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            targetElement.style.display = 'block';
+		var targetId = "#" + menuItem.getAttribute("data-target");
+		var targetElement = document.querySelector(targetId);
+		if (targetElement) {
+			targetElement.style.display = "block";
+		}
+	});
+});
+
+// Change event for "#alphabets"
+document.getElementById("alphabets").addEventListener("change", function() {
+    var char = this.value.toLowerCase();
+
+    if ('all' === char) {
+        document.querySelectorAll(".words tr").forEach(function(row) {
+            row.style.display = 'table-row';
+        });
+        return true;
+    }
+
+    // Hide all rows except the first one
+    Array.from(document.querySelectorAll(".words tr")).slice(1).forEach(function(row) {
+        row.style.display = 'none';
+    });
+
+    // Show rows whose first cell contains the specified character
+    Array.from(document.querySelectorAll(".words td")).forEach(function(td) {
+        if (td.textContent.toLowerCase().indexOf(char) === 0) {
+            td.parentElement.style.display = 'table-row';
         }
     });
 });
-
