@@ -1,4 +1,11 @@
 <?php
+session_start();
+$user_id = $_SESSION['id'] ?? 0;
+if ($user_id) {
+    header("location: words.php");
+    die();
+}
+
 include_once "config.php";
 include_once "function.php";
 $statusCode = $_GET['status'] ?? '';
@@ -29,7 +36,7 @@ $statusCode = $_GET['status'] ?? '';
                     <h1>Vocabulary Builder</h1>
                     <p>This is sample project for my learning php and mysql database</p>
                     <div class="text-center">
-                        <a id="login" class="selected-form"  href="#" >Log In</a> | <a id="register" href="#" >Register Account</a>
+                        <a id="login" class="selected-form" href="#">Log In</a> | <a id="register" href="#">Register Account</a>
                         <?php
                         if ($statusCode) {
                         ?>

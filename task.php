@@ -1,7 +1,9 @@
 <?php
+session_start();
 include_once "config.php";
 
 $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+mysqli_set_charset($connection, 'utf8');
 if (!$connection) {
     throw new Exception("failed to connect database");
     die();
@@ -52,7 +54,8 @@ elseif ("login" == $action) {
             $database_password = $data['password'];
             $database_id = $data['id'];
             if (password_verify($password, $database_password)) {
-                // $statusCode = 5;
+                $_user_id = $database_id;
+                $_SESSION['id'] =   $_user_id;
                 header("location: words.php");
                 die();
             } else {
@@ -65,4 +68,18 @@ elseif ("login" == $action) {
         $statusCode = 3;
     }
     header("location: index.php?status=$statusCode");
+}
+/**
+ * new word register functionlaity
+ */
+else if ("addword" == $action) {
+    $word = $_POST['word'] ?? '';
+    $meaning = $_POST['meaning'] ?? '';
+    $user_id = $_SESSION['id'];
+    if ($word && $meaning && $user_id) {
+        $query = "INSERT INTO words (user_id,word,definition) VALUES ('{$user_id}','{$word}','{$meaning}')";
+        mysqli_query($connection, $query);
+        $statusCode = 9;
+        header("location: words.php?status=$statusCode");
+    }
 }
